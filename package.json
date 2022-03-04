@@ -1,0 +1,17 @@
+{
+  "name": "DigitalCalender",
+  "version": "1.0.0",
+  "description": "",
+  "main": "scripts/app.js",
+  "scripts": {
+    "dev": "nodemon scripts/app.js",
+    "run": "scripts/app.js"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "helmet": "^5.0.2",
+    "nodemon": "^2.0.15"
+  }
+}
