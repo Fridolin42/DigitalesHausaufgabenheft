@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Digitales Hausaufgabenheft</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="shortcut icon" href="/img/notices.png" type="image/x-icon">
+</head>
+<body>
+<form id="form" method="post">
+    <% if(passwordSet) { %>
+        <h1>Passwort eingeben</h1>
+        <input type="password" placeholder="Passwort Eingeben" name="password">
+        <input type="number" value="1" name="type" class="hidden">
+    <% } else { %>
+        <h1>Passwort setzen</h1>
+        <p>Hinweis:<br>Das Passwort muss mindestens 10 Zeichen lang sein und 2 Zahlen, 2 Sonderzeichen und 2 Groß- und
+            Kleinbuchstaben haben.</p>
+        <input type="password" placeholder="Passwort Eingeben" name="password" id="password">
+        <input type="password" placeholder="Passwort Wiederholen" name="password_repeat" id="passwordRepeat">
+        <input type="number" value="2" name="type" class="hidden">
+    <% } %>
+    <p><input type="submit" <% if(!passwordSet) { %>style="display: none" <% } %>value="Bestätigen" id="submit"></p>
+</form>
+<% if (!passwordSet) { %>
+    <script nonce="<%= cspNonce %>">
+        const form = document.getElementById("form");
+        const password = document.getElementById("password");
+        const repeat = document.getElementById("passwordRepeat");
+        const submit = document.getElementById("submit");
+        password.onkeyup = () => {
+            if (password.value == null || password.value !== repeat.value || !checkPassword(password.value))
+                submit.style.display = "none";
+            else
+                setTimeout(() => {
+                    submit.style.display = "block";
+                }, 100);
+        }
+        repeat.onkeyup = password.onkeyup;
+
+        function checkPassword(password) {
+            const smallLetters = "abcdefghijklmnopqrstuvwxyz";
+            const bigLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const numbers = "1234567890";
+            if (password.length < 10) return false;
+            let small = 0, big = 0, int = 0, special = 0;
+            password.split("").forEach(value => {
+                if (smallLetters.includes(value)) small++;
+                else if (bigLetters.includes(value)) big++;
+                else if (numbers.includes(value)) int++;
+                else special++
+            })
+            return small >= 2 && big >= 2 && int >= 2 && special >= 2;
+        }
+
+        form.onsubmit = (event) => {
+            if (!(password.value != null && password.value === repeat.value && checkPassword(password.value))) {
+                event.preventDefault();
+            }
+        }
+    </script>
+<% } %>
+</body>
+</html>

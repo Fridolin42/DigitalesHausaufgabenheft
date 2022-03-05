@@ -1,0 +1,27 @@
+#topbar {
+    background-color: #2d2d2d;
+    padding: 0.3em;
+}
+
+#topbar img {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#topbarFlexContainer {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#topbarFlexContainer a {
+    margin-right: 1em;
+    font-size: 1.2em;
+    color: wheat;
+    text-decoration: none;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}

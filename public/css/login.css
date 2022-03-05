@@ -1,0 +1,37 @@
+html, body {
+    background-color: #3d3d3d;
+}
+
+input {
+    background-color: #3d3d3d;
+    border-color: #1d1d1d;
+    margin-top: 1em;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    color: black;
+}
+
+h1 {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+}
+
+.hidden {
+    display: none;
+}
+
+p {
+    max-width: 30em;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
