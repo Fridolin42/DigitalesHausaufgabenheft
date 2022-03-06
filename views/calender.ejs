@@ -6,9 +6,80 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="/img/notices.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/calender.css">
     <title>Hausaufgabenheft</title>
 </head>
 <body>
+<h1>Hausaufgabenheft</h1>
+<h3>Kalenderwoche: <%= calenderweek %></h3>
+<div id="container">
 
+    <% for (let dayNumber = 1; dayNumber <= 5; dayNumber++) {
+        let day = week[dayNumber];
+        let dayNameEnglish;
+        let dayNameGerman;
+        switch (dayNumber) {
+            case 1:
+                dayNameEnglish = "monday";
+                dayNameGerman = "Montag";
+                break;
+            case 2:
+                dayNameEnglish = "tuesday";
+                dayNameGerman = "Dienstag";
+                break;
+            case 3:
+                dayNameEnglish = "wednesday";
+                dayNameGerman = "Mittwoch";
+                break;
+            case 4:
+                dayNameEnglish = "thursday";
+                dayNameGerman = "Donnerstag";
+                break;
+            case 5:
+                dayNameEnglish = "friday";
+                dayNameGerman = "Freitag";
+        }
+    %>
+
+
+
+    <div id="<%=dayNameEnglish%>">
+        <p class="dayHeadline"><%=dayNameGerman%></p>
+        <hr>
+        <table>
+            <thead>
+            <tr>
+                <th class="subject">Fach</th>
+                <th>Aufgabe</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for (let entry of day) { %>
+                <tr>
+                    <td><%= entry.subject %></td>
+                    <td><%= entry.exercise %></td>
+                </tr>
+            <% } %>
+            </tbody>
+        </table>
+        <button id="add<%=dayNameEnglish.charAt(0).toUpperCase() + dayNameEnglish.slice(1)%>" class="add">Eintrag Hinzufügen</button>
+    </div>
+
+
+
+
+    <% } %>
+</div>
+<div id="placeHolder"></div>
+
+
+
+<div id="addEntry" style="display: none">
+    <input type="text" placeholder="Fach" id="subject">
+    <input type="text" placeholder="Aufgabe" id="exercise">
+    <button id="confirmAddEntry">Bestätigen</button>
+    <button id="cancelAddEntry">Abbrechen</button>
+</div>
+<script nonce="<%= cspNonce %>" src="/js/calender.js"></script>
 </body>
 </html>
