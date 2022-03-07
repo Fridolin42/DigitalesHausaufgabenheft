@@ -109,6 +109,11 @@ app.post("/addEntry", (req, res) => {
     } else res.send({"status": "unauthorized"})
 })
 
+//awsome button
+app.get("/awsomeButton", (req, res) => {
+    res.render("button", {content: "Das ist ein Button"});
+})
+
 //404
 app.all("*", (req, res) => {
     res.status(404);

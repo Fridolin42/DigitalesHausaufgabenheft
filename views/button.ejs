@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<svg class="filter" xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <defs>
+        <filter id="gooey">
+            <fegaussianblur in="SourceGraphic" stdDeviation="5" result="blur"/>
+            <feColorMatrix in="blur" type="matrix" values="
+            1 0 0 0 0
+            0 1 0 0 0
+            0 0 1 0 0
+            0 0 0 19 -9" result="heightContrastGraphic"/>
+            <feComposite in="SourceGraphic" in2="heightContrastGraphic" operator="atop"/>
+        </filter>
+    </defs>
+</svg>
+
+<button class="bubbleButton">
+    <link rel="stylesheet" href="/css/button.css">
+    <%= content %>
+    <span class="bubbles">
+        <span class="bubble"></span>
+        <span class="bubble"></span>
+        <span class="bubble"></span>
+        <span class="bubble"></span>
+        <span class="bubble"></span>
+        <span class="bubble"></span>
+        <span class="bubble"></span>
+        <span class="bubble"></span>
+        <span class="bubble"></span>
+        <span class="bubble"></span>
+        <span class="bubble"></span>
+        <span class="bubble"></span>
+        <span class="bubble"></span>
+        <span class="bubble"></span>
+        <span class="bubble"></span>
+    </span>
+</button>
+</body>
+</html>

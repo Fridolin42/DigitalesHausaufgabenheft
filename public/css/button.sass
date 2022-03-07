@@ -1,0 +1,62 @@
+$prime: #0f590f
+$second: wheat
+$amount: 15
+
+svg.filter
+  width: 0
+  height: 0
+
+body
+  background: gray
+
+.bubbleButton
+  margin-top: 7em
+
+  filter: url('#gooey')
+  padding: 1rem
+  font-size: 2rem
+  border: none
+  color: $second
+  position: relative
+  background-color: $prime
+
+  &:focus
+    outline: none
+
+  .bubbles
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+
+    .bubble
+      background-color: $prime
+      border-radius: 100%
+      position: absolute
+      top: 0
+      left: 0
+      display: block
+      z-index: -1
+
+      @for $bubble from 1 through $amount
+        &:nth-child(#{$bubble})
+          $size: 25px
+          $random: (random(80))
+          left: calc(#{$random+'%'} + 10%)
+          width: $size
+          height: $size
+          animation: move-#{$bubble} #{3+$bubble*0.02}s infinite
+          animation-delay: #{$bubble*0.2}s
+
+@for $bubble from 1 through $amount
+  @keyframes move-#{$bubble}
+    0%
+      transform: translate(0, 0)
+    80%
+      opacity: 0.8
+    99%
+      transform: translate(0, -(random(80) + 50)+px)
+    100%
+      opacity: 0
+      transform: translate(0, 0)

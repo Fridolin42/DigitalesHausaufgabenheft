@@ -1,0 +1,371 @@
+svg.filter {
+  width: 0;
+  height: 0;
+}
+
+body {
+  background: gray;
+}
+
+.bubbleButton {
+  margin-top: 7em;
+  filter: url("#gooey");
+  padding: 1rem;
+  font-size: 2rem;
+  border: none;
+  color: wheat;
+  position: relative;
+  background-color: #0f590f;
+}
+.bubbleButton:focus {
+  outline: none;
+}
+.bubbleButton .bubbles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.bubbleButton .bubbles .bubble {
+  background-color: #0f590f;
+  border-radius: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  z-index: -1;
+}
+.bubbleButton .bubbles .bubble:nth-child(1) {
+  left: calc(67% + 10%);
+  width: 25px;
+  height: 25px;
+  animation: move-1 3.02s infinite;
+  animation-delay: 0.2s;
+}
+.bubbleButton .bubbles .bubble:nth-child(2) {
+  left: calc(42% + 10%);
+  width: 25px;
+  height: 25px;
+  animation: move-2 3.04s infinite;
+  animation-delay: 0.4s;
+}
+.bubbleButton .bubbles .bubble:nth-child(3) {
+  left: calc(12% + 10%);
+  width: 25px;
+  height: 25px;
+  animation: move-3 3.06s infinite;
+  animation-delay: 0.6s;
+}
+.bubbleButton .bubbles .bubble:nth-child(4) {
+  left: calc(41% + 10%);
+  width: 25px;
+  height: 25px;
+  animation: move-4 3.08s infinite;
+  animation-delay: 0.8s;
+}
+.bubbleButton .bubbles .bubble:nth-child(5) {
+  left: calc(11% + 10%);
+  width: 25px;
+  height: 25px;
+  animation: move-5 3.1s infinite;
+  animation-delay: 1s;
+}
+.bubbleButton .bubbles .bubble:nth-child(6) {
+  left: calc(77% + 10%);
+  width: 25px;
+  height: 25px;
+  animation: move-6 3.12s infinite;
+  animation-delay: 1.2s;
+}
+.bubbleButton .bubbles .bubble:nth-child(7) {
+  left: calc(13% + 10%);
+  width: 25px;
+  height: 25px;
+  animation: move-7 3.14s infinite;
+  animation-delay: 1.4s;
+}
+.bubbleButton .bubbles .bubble:nth-child(8) {
+  left: calc(18% + 10%);
+  width: 25px;
+  height: 25px;
+  animation: move-8 3.16s infinite;
+  animation-delay: 1.6s;
+}
+.bubbleButton .bubbles .bubble:nth-child(9) {
+  left: calc(51% + 10%);
+  width: 25px;
+  height: 25px;
+  animation: move-9 3.18s infinite;
+  animation-delay: 1.8s;
+}
+.bubbleButton .bubbles .bubble:nth-child(10) {
+  left: calc(37% + 10%);
+  width: 25px;
+  height: 25px;
+  animation: move-10 3.2s infinite;
+  animation-delay: 2s;
+}
+.bubbleButton .bubbles .bubble:nth-child(11) {
+  left: calc(30% + 10%);
+  width: 25px;
+  height: 25px;
+  animation: move-11 3.22s infinite;
+  animation-delay: 2.2s;
+}
+.bubbleButton .bubbles .bubble:nth-child(12) {
+  left: calc(18% + 10%);
+  width: 25px;
+  height: 25px;
+  animation: move-12 3.24s infinite;
+  animation-delay: 2.4s;
+}
+.bubbleButton .bubbles .bubble:nth-child(13) {
+  left: calc(78% + 10%);
+  width: 25px;
+  height: 25px;
+  animation: move-13 3.26s infinite;
+  animation-delay: 2.6s;
+}
+.bubbleButton .bubbles .bubble:nth-child(14) {
+  left: calc(68% + 10%);
+  width: 25px;
+  height: 25px;
+  animation: move-14 3.28s infinite;
+  animation-delay: 2.8s;
+}
+.bubbleButton .bubbles .bubble:nth-child(15) {
+  left: calc(60% + 10%);
+  width: 25px;
+  height: 25px;
+  animation: move-15 3.3s infinite;
+  animation-delay: 3s;
+}
+
+@keyframes move-1 {
+  0% {
+    transform: translate(0, 0);
+  }
+  80% {
+    opacity: 0.8;
+  }
+  99% {
+    transform: translate(0, -106px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+}
+@keyframes move-2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  80% {
+    opacity: 0.8;
+  }
+  99% {
+    transform: translate(0, -100px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+}
+@keyframes move-3 {
+  0% {
+    transform: translate(0, 0);
+  }
+  80% {
+    opacity: 0.8;
+  }
+  99% {
+    transform: translate(0, -75px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+}
+@keyframes move-4 {
+  0% {
+    transform: translate(0, 0);
+  }
+  80% {
+    opacity: 0.8;
+  }
+  99% {
+    transform: translate(0, -107px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+}
+@keyframes move-5 {
+  0% {
+    transform: translate(0, 0);
+  }
+  80% {
+    opacity: 0.8;
+  }
+  99% {
+    transform: translate(0, -103px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+}
+@keyframes move-6 {
+  0% {
+    transform: translate(0, 0);
+  }
+  80% {
+    opacity: 0.8;
+  }
+  99% {
+    transform: translate(0, -107px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+}
+@keyframes move-7 {
+  0% {
+    transform: translate(0, 0);
+  }
+  80% {
+    opacity: 0.8;
+  }
+  99% {
+    transform: translate(0, -76px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+}
+@keyframes move-8 {
+  0% {
+    transform: translate(0, 0);
+  }
+  80% {
+    opacity: 0.8;
+  }
+  99% {
+    transform: translate(0, -127px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+}
+@keyframes move-9 {
+  0% {
+    transform: translate(0, 0);
+  }
+  80% {
+    opacity: 0.8;
+  }
+  99% {
+    transform: translate(0, -94px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+}
+@keyframes move-10 {
+  0% {
+    transform: translate(0, 0);
+  }
+  80% {
+    opacity: 0.8;
+  }
+  99% {
+    transform: translate(0, -98px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+}
+@keyframes move-11 {
+  0% {
+    transform: translate(0, 0);
+  }
+  80% {
+    opacity: 0.8;
+  }
+  99% {
+    transform: translate(0, -107px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+}
+@keyframes move-12 {
+  0% {
+    transform: translate(0, 0);
+  }
+  80% {
+    opacity: 0.8;
+  }
+  99% {
+    transform: translate(0, -60px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+}
+@keyframes move-13 {
+  0% {
+    transform: translate(0, 0);
+  }
+  80% {
+    opacity: 0.8;
+  }
+  99% {
+    transform: translate(0, -88px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+}
+@keyframes move-14 {
+  0% {
+    transform: translate(0, 0);
+  }
+  80% {
+    opacity: 0.8;
+  }
+  99% {
+    transform: translate(0, -74px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+}
+@keyframes move-15 {
+  0% {
+    transform: translate(0, 0);
+  }
+  80% {
+    opacity: 0.8;
+  }
+  99% {
+    transform: translate(0, -55px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+}
+
+/*# sourceMappingURL=button.css.map */
