@@ -11,7 +11,9 @@ const login = require("../userdata/login.json");
 const calender = require("../userdata/calender.json");
 
 //calender week
-Date.prototype.getWeek = function() {
+Date.prototype.getWeek = function () {
+    //Found at https://stackoverflow.com/a/34323944
+
     const date = new Date(this.getTime());
     date.setHours(0, 0, 0, 0);
     // Thursday in current week decides the year.
@@ -27,15 +29,19 @@ app.use((req, res, next) => {
 })
 
 //middleware
+
+//For Forms
 app.use(express.json());
 app.use(express.urlencoded({
     extended: true
 }));
+//Generate CSP Nonce
 app.use((req, res, next) => {
     res.locals.cspNonce = crypto.randomBytes(32).toString("hex");
     res.locals.passwordSet = login.password != null;
     next();
 })
+//Helmt for security
 app.use(helmet.contentSecurityPolicy({
     useDefaults: true,
     directives: {
@@ -45,16 +51,35 @@ app.use(helmet.contentSecurityPolicy({
 }));
 app.use(cookieParser());
 app.set("view engine", "ejs");
+//static Pages
 app.use(express.static("public"));
 
 //Sites
 app.get("/", ((req, res) => {
     if (req.cookies.password == null || req.cookies.password !== login.password)
+        //Login Page
         res.render("login");
-    else
+    else {
+        //Calender Page
+        let relativWeek = parseInt((req.query.relativeWeek | 0).toString());
+        let weekNumber = parseInt(new Date().getWeek().toString());
+        let absoluteWeek = weekNumber + relativWeek;
+        let week = calender[absoluteWeek];
+        if (week == null) {
+            week = {
+                "1": [],
+                "2": [],
+                "3": [],
+                "4": [],
+                "5": []
+            }
+        }
         res.render("calender", {
-            week: calender[new Date().getWeek()]
+            week: week,
+            relativeDays: relativWeek * 7,
+            calenderWeek: absoluteWeek
         });
+    }
 }))
 
 app.post("/", (req, res) => {
@@ -83,11 +108,11 @@ app.post("/", (req, res) => {
 app.post("/addEntry", (req, res) => {
     const password = req.cookies.password;
     if (password != null && password === login.password) {
-        console.log(JSON.stringify(req.body))
         const calenderWeek = req.body.week;
         const day = req.body.day;
         const subject = req.body.subject;
         const exercise = req.body.exercise;
+        //check for errors
         if (calenderWeek == null || day == null) res.send({"status": "no week or day"});
         else if (subject == null && exercise == null) res.send({"status": "no subject and no exercise"})
         else {
@@ -99,12 +124,50 @@ app.post("/addEntry", (req, res) => {
                 4: [],
                 5: [],
             };
+            //Push Entry into the week
             week[day].push({subject: subject, exercise: exercise});
             calender[calenderWeek] = week;
+            //write
             fs.writeFile("./userdata/calender.json", JSON.stringify(calender), (err) => {
                 if (err) throw err;
             })
             res.send({"status": "okay"})
+        }
+    } else res.send({"status": "unauthorized"})
+})
+
+//remove entry
+app.post("/deleteEntry", (req, res) => {
+    const password = req.cookies.password;
+    if (password != null && password === login.password) {
+        const calenderWeek = req.body.week;
+        const day = req.body.day;
+        const subject = req.body.subject;
+        const exercise = req.body.exercise;
+        if (calenderWeek == null) res.send({"status": "no calenderWeek"})
+        else if (day == null) res.send({"status": "no day"})
+        else if (subject == null) res.send({"status": "no subject"})
+        else if (exercise == null) res.send({"status": "exercise"})
+        else {
+            let deleted = false;
+            const week = calender[calenderWeek];
+            const calenderDay = week[day]
+            for (const key in calenderDay) {
+                const element = calender[calenderWeek][day][key]
+                if (element.subject === subject && element.exercise === exercise) {
+                    console.log("Key: " + key)
+                    calenderDay.splice(key, 1);
+                    week[day] = calenderDay;
+                    calender[calenderWeek] = week;
+                    res.send({"status": "sussfully deleted"})
+                    deleted = true
+                    //write
+                    fs.writeFile("./userdata/calender.json", JSON.stringify(calender), (err) => {
+                        if (err) throw err;
+                    })
+                }
+            }
+            if (!deleted) res.send({"status": "not found"})
         }
     } else res.send({"status": "unauthorized"})
 })

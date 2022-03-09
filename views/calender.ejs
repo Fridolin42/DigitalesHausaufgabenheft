@@ -10,12 +10,29 @@
     <title>Hausaufgabenheft</title>
 </head>
 <body>
+<canvas width="1920" height="1080" id="background"></canvas>
 <h1>Hausaufgabenheft</h1>
-<h3>Kalenderwoche: <%= calenderweek %></h3>
-<div id="container">
+<h3>Kalenderwoche: <%= calenderWeek %></h3>
+<%
+//Data calculation when the start and when it end
 
-    <% for (let dayNumber = 1; dayNumber <= 5; dayNumber++) {
+let now = new Date();
+let date = new Date(now.getTime() + relativeDays * 24 * 60 * 60 * 1000);
+
+let from = new Date(date.getTime() - (date.getDay() - 1) * 24 * 60 * 60 * 1000);
+let to = new Date(date.getTime() + (5 - date.getDay()) * 24 * 60 * 60 * 1000);
+%>
+<h3>Vom <%= from.toLocaleDateString() %> bis zum <%= to.toLocaleDateString() %></h3>
+<span id="navigator">
+    <button class="navigatorButton" id="previousWeek">Vorherige Woche</button>
+    <button class="navigatorButton" id="currentWeek">Aktuelle Woche</button>
+    <button class="navigatorButton" id="nextWeek">Nächste Woche</button>
+</span>
+<div id="container">
+    <% //The week of the calendar are given in an array, this for loop loops over the array
+    for (let dayNumber = 1; dayNumber <= 5; dayNumber++) {
         let day = week[dayNumber];
+        //The German Name if that, what you see, the english name is for example for the element id
         let dayNameEnglish;
         let dayNameGerman;
         switch (dayNumber) {
@@ -41,10 +58,8 @@
         }
     %>
 
-
-
-    <div id="<%=dayNameEnglish%>">
-        <p class="dayHeadline"><%=dayNameGerman%></p>
+    <div id="<%= dayNameEnglish %>">
+        <p class="dayHeadline"><%= dayNameGerman %></p>
         <hr>
         <table>
             <thead>
@@ -58,20 +73,27 @@
                 <tr>
                     <td><%= entry.subject %></td>
                     <td><%= entry.exercise %></td>
+                    <td>
+                        <button class="deleteButton"
+                                subject="<%= entry.subject %>"
+                                exercise="<%= entry.exercise %>"
+                                week="<%= calenderWeek %>"
+                                day="<%= dayNumber %>">
+                            del
+                        </button>
+                    </td>
                 </tr>
             <% } %>
             </tbody>
         </table>
-        <button id="add<%=dayNameEnglish.charAt(0).toUpperCase() + dayNameEnglish.slice(1)%>" class="add">Eintrag Hinzufügen</button>
+        <button id="add<%= dayNameEnglish.charAt(0).toUpperCase() + dayNameEnglish.slice(1) %>" class="add">Eintrag
+            Hinzufügen
+        </button>
     </div>
-
-
-
 
     <% } %>
 </div>
 <div id="placeHolder"></div>
-
 
 
 <div id="addEntry" style="display: none">
@@ -81,5 +103,6 @@
     <button id="cancelAddEntry">Abbrechen</button>
 </div>
 <script nonce="<%= cspNonce %>" src="/js/calender.js"></script>
+<script nonce="<%= cspNonce %>" src="/js/background.js"></script>
 </body>
 </html>
