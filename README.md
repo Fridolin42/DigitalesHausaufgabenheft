@@ -5,7 +5,7 @@
 * Kopiere die zuerst das Projekt in einen eigenen Ordner
 * Führe ``npm install`` aus
 * Das wird alle benötigten Bibliotheken herunterladen
-* Um das ganze dann zu staten, führe: ``node app.js`` aus
+* Um das ganze dann zu staten, führe: ``node scripts/app.js`` aus
 
 ### Einleitung
 * Das Programm wird einen Webserver auf Port 1337 starten, gehe deswegen auf http://localhost:1337/
